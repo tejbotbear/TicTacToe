@@ -6,24 +6,23 @@ date
 
 #include<iostream>
 using namespace std;
+void Turn(char Board[4][4], int i, int j);
 
-void printBoard() {
-  int i,j;
-  //cout<<"Printing a 2D Array:\n";
+void printBoard(char Board[4][4], int i, int j) {
   for (i = 0; i < 4; i++) {
     for (j = 0; j < 4; j++) {
       cout<</*"\t"<<*/Board[i][j];
     }
     cout<<endl;
   }
-  Turn();
+  Turn(Board, i, j);
 }
 
-void Turn( ) {
+void Turn(char Board[4][4], int i, int j) {
   bool XTurn = true;
   bool EndGame = false;
   bool ValidTurn = false;
-  bool Print;
+  bool Printed;
   char Column, Row;
   do {
     if (XTurn == true) {
@@ -65,7 +64,7 @@ void Turn( ) {
 	    ValidTurn = true; 
 	  }
 	}
-      } while (ValidTurn = false && XTurn = false && Printed == true)
+      } while (ValidTurn == false && XTurn == false && Printed == true);
 	Printed = false;
     }
     else { // O PLAYERS TURN
@@ -107,16 +106,17 @@ void Turn( ) {
 	    ValidTurn = true; 
 	  }
 	}
-      } while (ValidTurn = false && XTurn = false && Printed == true)
+      } while (ValidTurn == false && XTurn == false && Printed == true);
     }
-  } while (EndGame == false)
+  } while (EndGame == false);
     Printed = false;
-  PrintBoard();
+    printBoard(Board, i, j);
 }
 
-main( ) {  
+int main() {  
 
-  int XWins, OWins;
+  int i = 0;
+  int j = 0;
 
   char Board[4][4] = {
     { ' ', '1', '2', '3' },
@@ -124,9 +124,6 @@ main( ) {
     { 'b', ' ', ' ', ' ' },
     { 'c', ' ', ' ', ' ' }
      } ;
-
-  }
-  Turn();
+  printBoard(Board, i, j);
+  Turn(Board, i, j);
 }
-
-
