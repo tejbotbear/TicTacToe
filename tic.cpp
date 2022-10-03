@@ -11,7 +11,7 @@ void Turn(char Board[4][4], int i, int j);
 void printBoard(char Board[4][4], int i, int j) {
   for (i = 0; i < 4; i++) {
     for (j = 0; j < 4; j++) {
-      cout<</*"\t"<<*/Board[i][j];
+      cout<<"\t"<<Board[i][j];
     }
     cout<<endl;
   }
@@ -20,93 +20,97 @@ void printBoard(char Board[4][4], int i, int j) {
 
 void Turn(char Board[4][4], int i, int j) {
   bool XTurn = true;
-  bool EndGame = false;
+  bool EndGame = true;
   bool ValidTurn = false;
-  bool Printed;
-  char Column, Row;
+  bool Printed = false;
+  char Column = ' ';
+  char Row = ' ';
   do {
     if (XTurn == true) {
       cout << "It is the X players turn." << endl;
       do {
 	cout << "Enter what column you would like your input to go in." << endl;
 	cin >> Column;
-	if (Column != '1', '2', '3') {
+	cout << Column << endl;
+	if (Column != '1' && Column != '2' && Column != '3') {
 	  cout << "Not a valid input." << endl;
 	}
 	else {
 	  cout << "Enter what row you would like your input to go in. ('a', 'b', 'c')" << endl;
 	  cin >> Row;
-	  if (Row != 'a', 'b', 'c') {
+	  cout << Row << endl;
+	  if (Row != 'a' && Row != 'b' && Row != 'c') {
 	    cout << "Not a valid input." << endl;
 	  }
 	  else {
 	    if (Column == '1') {
-	     j = 2;
+	     j = 1;
 	    }
 	    else if (Column == '2') {
+	      j = 2;
+	    }
+	    else {
 	      j = 3;
 	    }
-	    else {
-	      j = 4;
-	    }
 	    if (Row == 'a') {
-	      i = 2;
+	      i = 1;
 	    }
 	    else if (Row == 'b') {
-	      i = 3;
+	      i = 2;
 	    }
 	    else {
-	      j = 4;
+	      i = 3;
 	    }
 	    Board[i][j] = 'x';
+	    printBoard(Board, i, j);
 	    Printed = true;
 	    XTurn = false;
 	    ValidTurn = true; 
-	  }
-	}
-      } while (ValidTurn == false && XTurn == false && Printed == true);
-	Printed = false;
+	  }cout << "Move is X" << Printed << XTurn << ValidTurn << endl;
+	} 
+      } while (!(ValidTurn == true && XTurn == false && Printed == true));
     }
     else { // O PLAYERS TURN
       cout << "It is the O players turn." << endl;
             do {
 	cout << "Enter what column you would like your input to go in." << endl;
 	cin >> Column;
-	if (Column != '1', '2', '3') {
+	if (Column != '1' && Column != '2' && Column != '3') {
 	  cout << "Not a valid input." << endl;
 	}
 	else {
 	  cout << "Enter what row you would like your input to go in. ('a', 'b', 'c')" << endl;
 	  cin >> Row;
-	  if (Row != 'a', 'b', 'c') {
+	  if (Row != 'a' && Row != 'b' && Row != 'c') {
 	    cout << "Not a valid input." << endl;
 	  }
 	  else {
 	    if (Column == '1') {
-	     j = 2;
+	     j = 1;
 	    }
 	    else if (Column == '2') {
+	      j = 2;
+	    }
+	    else {
 	      j = 3;
 	    }
-	    else {
-	      j = 4;
-	    }
 	    if (Row == 'a') {
-	      i = 2;
+	      i = 1;
 	    }
 	    else if (Row == 'b') {
-	      i = 3;
+	      i = 2;
 	    }
 	    else {
-	      j = 4;
+	      j = 3;
 	    }
+	    printBoard(Board, i, j);
 	    Board[i][j] = 'o';
 	    Printed = true;
 	    XTurn = true;
 	    ValidTurn = true; 
 	  }
 	}
-      } while (ValidTurn == false && XTurn == false && Printed == true);
+      } while (ValidTurn == true || XTurn == false || Printed == true);
     }
   } while (EndGame == false);
     Printed = false;
