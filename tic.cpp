@@ -210,15 +210,12 @@ void Turn(char Board[4][4], int i, int j, int XWins, int OWins, bool XWon, bool 
     printBoard(Board, i, j);
 }
 
-
-void int ReDO() {
-
+void int ReDo() {
   int i = 0;
   int j = 0;
   bool XWon = false;
   bool OWon = false;
   bool EndGame = false;
-
   char Board[4][4] = {
     { ' ', '1', '2', '3' },
     { 'a', ' ', ' ', ' ' },
@@ -227,15 +224,11 @@ void int ReDO() {
      } ;
   printBoard(Board, i, j);
   Turn(Board, i, j, XWins, OWins, XWon, OWon, EndGame);
-
 }
 
-
-
 int main() {  
-
   int XWins = 0;
   int OWins = 0;
   int Ties = 0;
-  ReDO();
+  ReDo();
 }
