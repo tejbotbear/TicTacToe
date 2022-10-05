@@ -6,7 +6,90 @@ date
 
 #include<iostream>
 using namespace std;
-void Turn(char Board[4][4], int i, int j);
+void Turn(char Board[4][4], int i, int j, int XWins, int OWins, bool XWom, bool OWon, bool EndGame);
+
+void checkWin(char Board[4][4], int i, int j, int XWins, int OWins, bool XWon, bool OWon, bool EndGame) {
+  if (Board[1][1] == 'x' && Board[2][1] == 'x' && Board[3][1] == 'x') { //left column all X
+    XWins = XWins + 1;
+    cout << "X wins!! X has won " << XWins << " times! Play again? (y/n)" << endl;
+    XWon = true;
+  }
+  else if (Board[1][2] == 'x' && Board[2][2] == 'x' && Board[3][2] == 'x') { // middle column all X
+    XWins = XWins + 1;
+    cout << "X wins! X has won " << XWins << " times! Play again? (y/n)" << endl;
+    XWon = true;
+  }
+  else if (Board[1][3] == 'x' && Board[2][3] == 'x' && Board[3][3] == 'x') { // right column all X
+    XWins = XWins + 1;
+    cout << "X wins! X has won " << XWins << " times! Play again? (y/n)" << endl;
+    XWon = true;
+  }
+  else if (Board[1][1] == 'x' && Board[1][2] == 'x' && Board[1][3] == 'x') { // top row all X
+    XWins = XWins + 1;
+    cout << "X wins! X has won " << XWins << " times! Play again? (y/n)" << endl;
+    XWon = true;
+  }
+  else if (Board[2][1] == 'x' && Board[2][2] == 'x' && Board[2][3] == 'x') { // middle row all X
+    XWins = XWins + 1;
+    cout << "X wins! X has won " << XWins << " times! Play again? (y/n)" << endl;
+    XWon = true;
+  }
+  else if (Board[3][1] == 'x' && Board[3][2] == 'x' && Board[3][3] == 'x') { // bottom row all X
+    XWins = XWins + 1;
+    cout << "X wins! X has won " << XWins << " times! Play again? (y/n)" << endl;
+    XWon = true;
+  }
+  else if (Board[1][1] == 'x' && Board[2][2] == 'x' && Board[3][3] == 'x') { // top left to bottom right all X
+    XWins = XWins + 1;
+    cout << "X wins! X has won " << XWins << " times! Play again? (y/n)" << endl;
+    XWon = true;
+  }
+  else if (Board[1][3] == 'x' && Board[2][2] == 'x' && Board[3][1] == 'x') { // bottom left to top right all X
+    XWins = XWins + 1;
+    cout << "X wins! X has won " << XWins << " times! Play again? (y/n)" << endl;
+    XWon = true;
+  }
+  else if (Board[1][1] == 'o' && Board[2][1] == 'o' && Board[3][1] == 'o') { //left column all O
+    OWins = OWins + 1;
+    cout << "O wins! O has won " << OWins << " times! Play again? (y/n)" << endl;
+    OWon = true;
+  }
+  else if (Board[1][2] == 'o' && Board[2][2] == 'o' && Board[3][2] == 'o') { // middle column all O
+    OWins = OWins + 1;
+    cout << "O wins! O has won " << OWins << " times! Play again? (y/n)" << endl;
+    OWon = true;
+  }
+  else if (Board[1][3] == 'o' && Board[2][3] == 'o' && Board[3][3] == 'o') { // right column all O
+    OWins = OWins + 1;
+    cout << "O wins! O has won " << OWins << " times! Play again? (y/n)" << endl;
+    OWon = true;
+  }
+  else if (Board[1][1] == 'o' && Board[1][2] == 'o' && Board[1][3] == 'o') { // top row all O
+    OWins = OWins + 1;
+    cout << "O wins! O has won " << OWins << " times! Play again? (y/n)" << endl;
+    OWon = true;
+  }
+  else if (Board[2][1] == 'o' && Board[2][2] == 'o' && Board[2][3] == 'o') { // middle row all O
+    OWins = OWins + 1;
+    cout << "O wins! O has won " << OWins << " times! Play again? (y/n)" << endl;
+    OWon = true;
+  }
+  else if (Board[3][1] == 'o' && Board[3][2] == 'o' && Board[3][3] == 'o') { // bottom row all O
+    OWins = OWins + 1;
+    cout << "O wins O has won " << OWins << " times! Play again? (y/n)" << endl;
+    OWon = true;
+  }
+  else if (Board[1][1] == 'o' && Board[2][2] == 'o' && Board[3][3] == 'o') { // top left to bottom right all O
+    OWins = OWins + 1;
+    cout << "O wins O has won " << OWins << " times! Play again? (y/n)" << endl;
+    OWon = true;
+  }
+  else if (Board[1][3] == 'o' && Board[2][2] == 'o' && Board[3][1] == 'o') { // bottom left to top right all O
+    OWins = OWins + 1;
+    cout << "O wins O has won " << OWins << " times! Play again? (y/n)" << endl;
+    OWon = true;
+  }
+}
 
 void printBoard(char Board[4][4], int i, int j) {
   for (i = 0; i < 4; i++) {
@@ -15,30 +98,27 @@ void printBoard(char Board[4][4], int i, int j) {
     }
     cout<<endl;
   }
-  Turn(Board, i, j);
+  //Turn(Board, i, j);
 }
 
-void Turn(char Board[4][4], int i, int j) {
+void Turn(char Board[4][4], int i, int j, int XWins, int OWins, bool XWon, bool OWon, bool EndGame) {
   bool XTurn = true;
-  bool EndGame = true;
+  EndGame = false;
   bool ValidTurn = false;
   bool Printed = false;
   char Column = ' ';
   char Row = ' ';
   do {
     if (XTurn == true) {
-      cout << "It is the X players turn." << endl;
       do {
-	cout << "Enter what column you would like your input to go in." << endl;
+	cout << "(X TURN) Enter what column you would like your input to go in. ('1', '2', '3')" << endl;
 	cin >> Column;
-	cout << Column << endl;
 	if (Column != '1' && Column != '2' && Column != '3') {
 	  cout << "Not a valid input." << endl;
 	}
 	else {
 	  cout << "Enter what row you would like your input to go in. ('a', 'b', 'c')" << endl;
 	  cin >> Row;
-	  cout << Row << endl;
 	  if (Row != 'a' && Row != 'b' && Row != 'c') {
 	    cout << "Not a valid input." << endl;
 	  }
@@ -61,19 +141,25 @@ void Turn(char Board[4][4], int i, int j) {
 	    else {
 	      i = 3;
 	    }
-	    Board[i][j] = 'x';
-	    printBoard(Board, i, j);
-	    Printed = true;
-	    XTurn = false;
-	    ValidTurn = true; 
-	  }cout << "Move is X" << Printed << XTurn << ValidTurn << endl;
+	    if (Board[i][j] == 'x' || Board[i][j] == 'o') {
+	      cout << "It seems that this spot on the board is already occupied. Please choose another spot." << endl;
+	      ValidTurn = false; 
+	    }
+	    else {
+	      Board[i][j] = 'x';
+	      XTurn = false;
+	      printBoard(Board, i, j);
+	      checkWin(Board, i, j, XWins, OWins, XWon, OWon, EndGame);
+	      Printed = true;
+	      ValidTurn = true;
+	    }
+	  }
 	} 
       } while (!(ValidTurn == true && XTurn == false && Printed == true));
     }
     else { // O PLAYERS TURN
-      cout << "It is the O players turn." << endl;
-            do {
-	cout << "Enter what column you would like your input to go in." << endl;
+       do {
+	cout << "(O TURN) Enter what column you would like your input to go in. ('1', '2', '3')" << endl;
 	cin >> Column;
 	if (Column != '1' && Column != '2' && Column != '3') {
 	  cout << "Not a valid input." << endl;
@@ -101,26 +187,37 @@ void Turn(char Board[4][4], int i, int j) {
 	      i = 2;
 	    }
 	    else {
-	      j = 3;
+	      i = 3;
 	    }
-	    printBoard(Board, i, j);
-	    Board[i][j] = 'o';
-	    Printed = true;
-	    XTurn = true;
-	    ValidTurn = true; 
+	    if (Board[i][j] == 'x' || Board[i][j] == 'o') {
+	      cout << "It seems that this spot on the board is already occupied. Please choose another spot." << endl;
+	      ValidTurn = false; 
+	    }
+	    else {
+	      Board[i][j] = 'o';
+	      XTurn = true;
+	      printBoard(Board, i, j);
+	      checkWin(Board, i, j, XWins, OWins, XWon, OWon, EndGame);
+	      Printed = true;
+	      ValidTurn = true;
+	    }
 	  }
-	}
-      } while (ValidTurn == true || XTurn == false || Printed == true);
+	} 
+       } while (!(ValidTurn == true && XTurn == true && Printed == true));
     }
   } while (EndGame == false);
     Printed = false;
     printBoard(Board, i, j);
 }
 
-int main() {  
+
+void int ReDO() {
 
   int i = 0;
   int j = 0;
+  bool XWon = false;
+  bool OWon = false;
+  bool EndGame = false;
 
   char Board[4][4] = {
     { ' ', '1', '2', '3' },
@@ -129,5 +226,16 @@ int main() {
     { 'c', ' ', ' ', ' ' }
      } ;
   printBoard(Board, i, j);
-  Turn(Board, i, j);
+  Turn(Board, i, j, XWins, OWins, XWon, OWon, EndGame);
+
+}
+
+
+
+int main() {  
+
+  int XWins = 0;
+  int OWins = 0;
+  int Ties = 0;
+  ReDO();
 }
