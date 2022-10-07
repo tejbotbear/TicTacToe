@@ -7,6 +7,7 @@ date
 #include<iostream>
 using namespace std;
 void Turn(char Board[4][4], int i, int j, int XWins, int OWins, bool XWom, bool OWon, bool EndGame);
+void ReDo(int XWins, int OWins, int Ties);
 
 void checkWin(char Board[4][4], int i, int j, int XWins, int OWins, bool XWon, bool OWon, bool EndGame) {
   if (Board[1][1] == 'x' && Board[2][1] == 'x' && Board[3][1] == 'x') { //left column all X
@@ -103,11 +104,12 @@ void printBoard(char Board[4][4], int i, int j) {
 
 void Turn(char Board[4][4], int i, int j, int XWins, int OWins, bool XWon, bool OWon, bool EndGame) {
   bool XTurn = true;
-  EndGame = false;
   bool ValidTurn = false;
   bool Printed = false;
   char Column = ' ';
   char Row = ' ';
+  //EndGame = false;
+
   do {
     if (XTurn == true) {
       do {
@@ -210,7 +212,14 @@ void Turn(char Board[4][4], int i, int j, int XWins, int OWins, bool XWon, bool 
     printBoard(Board, i, j);
 }
 
-void int ReDo() {
+int main() {  
+  static int XWins = 0;
+  static int OWins = 0;
+  static int Ties = 0;
+  ReDo(XWins, OWins, Ties);
+}
+
+void ReDo(int XWins, int OWins, int Ties) {
   int i = 0;
   int j = 0;
   bool XWon = false;
@@ -224,11 +233,4 @@ void int ReDo() {
      } ;
   printBoard(Board, i, j);
   Turn(Board, i, j, XWins, OWins, XWon, OWon, EndGame);
-}
-
-int main() {  
-  int XWins = 0;
-  int OWins = 0;
-  int Ties = 0;
-  ReDo();
 }
