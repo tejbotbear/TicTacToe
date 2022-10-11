@@ -9,17 +9,10 @@ using namespace std;
 void Turn(char Board[4][4], int i, int j, int& X, int& O, int& T, bool& END);
 void ReDo(int& X, int& O, int& T, int& TieCheck);
 
-void CheckTie()
-
-void checkWin(char Board[4][4], int i, int j, int& X, int& O, int& T, bool& END) {
+void checkWin(char Board[4][4], int i, int j, int& X, int& O, int& T, bool& END, int& TieCheck) {
   char PlayAgain = ' ';
   
-  if (TieCheck == 9) {
-    cout << "ITS A TIE! A tie has occoured " << T << " times." << endl;
-    cout << "X wins! X has won " << X  << " times."<< endl;
-    cout << "O has won " << O << " times." << endl;
-  }	
-  else if (Board[1][1] == 'x' && Board[2][1] == 'x' && Board[3][1] == 'x') { //left column all X
+  if (Board[1][1] == 'x' && Board[2][1] == 'x' && Board[3][1] == 'x') { //left column all X
     X = X + 1;
     cout << "X wins! X has won " << X  << " times."<< endl;
     cout << "O has won " << O << " times." << endl;
@@ -66,7 +59,7 @@ void checkWin(char Board[4][4], int i, int j, int& X, int& O, int& T, bool& END)
   }
   else if (Board[1][1] == 'x' && Board[1][2] == 'x' && Board[1][3] == 'x') { // top row all X
     X = X + 1;
-    cout << "X wins! X has won " << X << " times." endl;
+    cout << "X wins! X has won " << X << " times." << endl;
     cout << "O has won " << O << " times." << endl;
     cout << "A tie has occoured " << T << " times." << endl;
     cout << "Play again? (y/n)" << endl;
@@ -258,6 +251,21 @@ void checkWin(char Board[4][4], int i, int j, int& X, int& O, int& T, bool& END)
       exit(0);
     }
   }
+  if (TieCheck == 9) {
+    T = T + 1;
+    cout << "ITS A TIE! A tie has occoured " << T << " times." << endl;
+    cout << "X has won " << X  << " times."<< endl;
+    cout << "O has won " << O << " times." << endl;
+    cout << "Play again? (y/n)" << endl;
+    cin >> PlayAgain;
+    if (PlayAgain == 'y') {
+      ReDo(X, O, T, TieCheck);
+    }
+    else {
+      END = true;
+      exit(0);
+    }
+  }
 }
 
 void printBoard(char Board[4][4], int i, int j) {
@@ -369,7 +377,7 @@ void Turn(char Board[4][4], int i, int j, int& X, int& O, int& T, bool& END, int
 	      printBoard(Board, i, j);
 	      Printed = true;
 	      ValidTurn = true;
-	      checkWin(Board, i, j, X, O, T, END);
+	      checkWin(Board, i, j, X, O, T, END, TieCheck);
 	    }
 	  }
 	} 
@@ -387,7 +395,9 @@ int main() {
   int& O = OWins;
   int Ties = 0;
   int& T = Ties;
-  ReDo(X, O, T);
+  int TC = 0;
+  int& TieCheck = TC;
+  ReDo(X, O, T, TieCheck);
 }
 
 void ReDo(int& X, int& O, int& T, int& TieCheck) {
