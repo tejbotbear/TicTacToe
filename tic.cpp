@@ -1,7 +1,7 @@
 /*
 Tej Hiremath
-This program allows the user to play TicTacToe in the terminal window.
-date
+This program allows the user to play TicTacToe in the command prompt window.
+14th October 2022
 */
 #include <stdlib.h>
 #include <iostream>
