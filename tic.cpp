@@ -9,9 +9,17 @@ using namespace std;
 void Turn(char Board[4][4], int i, int j, int& X, int& O, int& T, bool& END);
 void ReDo(int& X, int& O, int& T, int& TieCheck);
 
+void CheckTie()
+
 void checkWin(char Board[4][4], int i, int j, int& X, int& O, int& T, bool& END) {
   char PlayAgain = ' ';
-  if (Board[1][1] == 'x' && Board[2][1] == 'x' && Board[3][1] == 'x') { //left column all X
+  
+  if (TieCheck == 9) {
+    cout << "ITS A TIE! A tie has occoured " << T << " times." << endl;
+    cout << "X wins! X has won " << X  << " times."<< endl;
+    cout << "O has won " << O << " times." << endl;
+  }	
+  else if (Board[1][1] == 'x' && Board[2][1] == 'x' && Board[3][1] == 'x') { //left column all X
     X = X + 1;
     cout << "X wins! X has won " << X  << " times."<< endl;
     cout << "O has won " << O << " times." << endl;
@@ -308,6 +316,7 @@ void Turn(char Board[4][4], int i, int j, int& X, int& O, int& T, bool& END, int
 	    else {
 	      Board[i][j] = 'x';
 	      XTurn = false;
+	      TieCheck = TieCheck + 1;
 	      printBoard(Board, i, j);
 	      checkWin(Board, i, j, X, O, T, END, TieCheck);
 	      Printed = true;
@@ -356,6 +365,7 @@ void Turn(char Board[4][4], int i, int j, int& X, int& O, int& T, bool& END, int
 	    else {
 	      Board[i][j] = 'o';
 	      XTurn = true;
+	      TieCheck = TieCheck + 1;
 	      printBoard(Board, i, j);
 	      Printed = true;
 	      ValidTurn = true;
