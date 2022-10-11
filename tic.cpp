@@ -7,10 +7,9 @@ date
 #include <iostream>
 using namespace std;
 void Turn(char Board[4][4], int i, int j, int& X, int& O, int& T, bool& END);
-void ReDo(int& X, int& O, int& T);
+void ReDo(int& X, int& O, int& T, int& TieCheck);
 
 void checkWin(char Board[4][4], int i, int j, int& X, int& O, int& T, bool& END) {
-
   char PlayAgain = ' ';
   if (Board[1][1] == 'x' && Board[2][1] == 'x' && Board[3][1] == 'x') { //left column all X
     X = X + 1;
@@ -20,7 +19,7 @@ void checkWin(char Board[4][4], int i, int j, int& X, int& O, int& T, bool& END)
     cout << "Play again? (y/n)" << endl;
     cin >> PlayAgain;
     if (PlayAgain == 'y') {
-      ReDo(X, O, T);
+      ReDo(X, O, T, TieCheck);
     }
     else {
       END = true;
@@ -35,7 +34,7 @@ void checkWin(char Board[4][4], int i, int j, int& X, int& O, int& T, bool& END)
     cout << "Play again? (y/n)" << endl;
     cin >> PlayAgain;
     if (PlayAgain == 'y') {
-      ReDo(X, O, T);
+      ReDo(X, O, T, TieCheck);
     }
     else {
       END = true;
@@ -50,7 +49,7 @@ void checkWin(char Board[4][4], int i, int j, int& X, int& O, int& T, bool& END)
     cout << "Play again? (y/n)" << endl;
     cin >> PlayAgain;
     if (PlayAgain == 'y') {
-      ReDo(X, O, T);
+      ReDo(X, O, T, TieCheck);
     }
     else {
       END = true;
@@ -65,7 +64,7 @@ void checkWin(char Board[4][4], int i, int j, int& X, int& O, int& T, bool& END)
     cout << "Play again? (y/n)" << endl;
     cin >> PlayAgain;
     if (PlayAgain == 'y') {
-      ReDo(X, O, T);
+      ReDo(X, O, T, TieCheck);
      }
     else {
       END = true;
@@ -80,7 +79,7 @@ void checkWin(char Board[4][4], int i, int j, int& X, int& O, int& T, bool& END)
     cout << "Play again? (y/n)" << endl;
     cin >> PlayAgain;
     if (PlayAgain == 'y') {
-      ReDo(X, O, T);
+      ReDo(X, O, T, TieCheck);
     }
     else {
       END = true;
@@ -95,7 +94,7 @@ void checkWin(char Board[4][4], int i, int j, int& X, int& O, int& T, bool& END)
     cout << "Play again? (y/n)" << endl;
     cin >> PlayAgain;
     if (PlayAgain == 'y') {
-      ReDo(X, O, T);
+      ReDo(X, O, T, TieCheck);
     }
     else {
       END = true;
@@ -110,7 +109,7 @@ void checkWin(char Board[4][4], int i, int j, int& X, int& O, int& T, bool& END)
     cout << "Play again? (y/n)" << endl;
     cin >> PlayAgain;
     if (PlayAgain == 'y') {
-      ReDo(X, O, T);
+      ReDo(X, O, T, TieCheck);
     }
     else {
       END = true;
@@ -125,7 +124,7 @@ void checkWin(char Board[4][4], int i, int j, int& X, int& O, int& T, bool& END)
     cout << "Play again? (y/n)" << endl;
     cin >> PlayAgain;
     if (PlayAgain == 'y') {
-      ReDo(X, O, T);
+      ReDo(X, O, T, TieCheck);
     }
     else {
       END = true;
@@ -140,7 +139,7 @@ void checkWin(char Board[4][4], int i, int j, int& X, int& O, int& T, bool& END)
     cout << "Play again? (y/n)" << endl;
     cin >> PlayAgain;
     if (PlayAgain == 'y') {
-      ReDo(X, O, T);
+      ReDo(X, O, T, TieCheck);
     }
     else {
       END = true;
@@ -155,7 +154,7 @@ void checkWin(char Board[4][4], int i, int j, int& X, int& O, int& T, bool& END)
     cout << "Play again? (y/n)" << endl;
     cin >> PlayAgain;
     if (PlayAgain == 'y') {
-      ReDo(X, O, T);
+      ReDo(X, O, T, TieCheck);
     }
     else {
       END = true;
@@ -169,7 +168,7 @@ void checkWin(char Board[4][4], int i, int j, int& X, int& O, int& T, bool& END)
     cout << "A tie has occoured " << T << " times." << endl;
     cout << "Play again? (y/n)" << endl;
     if (PlayAgain == 'y') {
-      ReDo(X, O, T);
+      ReDo(X, O, T, TieCheck);
     }
     else {
       END = true;
@@ -184,7 +183,7 @@ void checkWin(char Board[4][4], int i, int j, int& X, int& O, int& T, bool& END)
     cout << "Play again? (y/n)" << endl;
     cin >> PlayAgain;
     if (PlayAgain == 'y') {
-      ReDo(X, O, T);
+      ReDo(X, O, T, TieCheck);
     }
     else {
       END = true;
@@ -199,7 +198,7 @@ void checkWin(char Board[4][4], int i, int j, int& X, int& O, int& T, bool& END)
     cout << "Play again? (y/n)" << endl;
     cin >> PlayAgain;
     if (PlayAgain == 'y') {
-      ReDo(X, O, T);
+      ReDo(X, O, T, TieCheck);
     }
     else {
       END = true;
@@ -214,7 +213,7 @@ void checkWin(char Board[4][4], int i, int j, int& X, int& O, int& T, bool& END)
     cout << "Play again? (y/n)" << endl;
     cin >> PlayAgain;
     if (PlayAgain == 'y') {
-      ReDo(X, O, T);
+      ReDo(X, O, T, TieCheck);
     }
     else {
       END = true;
@@ -229,7 +228,7 @@ void checkWin(char Board[4][4], int i, int j, int& X, int& O, int& T, bool& END)
     cout << "Play again? (y/n)" << endl;
     cin >> PlayAgain;
     if (PlayAgain == 'y') {
-      ReDo(X, O, T);
+      ReDo(X, O, T, TieCheck);
     }
     else {
       END = true;
@@ -244,7 +243,7 @@ void checkWin(char Board[4][4], int i, int j, int& X, int& O, int& T, bool& END)
     cout << "Play again? (y/n)" << endl;
     cin >> PlayAgain;
     if (PlayAgain == 'y') {
-      ReDo(X, O, T);
+      ReDo(X, O, T, TieCheck);
     }
     else {
       END = true;
@@ -260,16 +259,14 @@ void printBoard(char Board[4][4], int i, int j) {
     }
     cout<<endl;
   }
-  //Turn(Board, i, j);
-}
+ }
 
-void Turn(char Board[4][4], int i, int j, int& X, int& O, int& T, bool& END) {
+void Turn(char Board[4][4], int i, int j, int& X, int& O, int& T, bool& END, int& TieCheck) {
   bool XTurn = true;
   bool ValidTurn = false;
   bool Printed = false;
   char Column = ' ';
   char Row = ' ';
-  //EndGame = false;
 
   do {
     if (XTurn == true) {
@@ -312,7 +309,7 @@ void Turn(char Board[4][4], int i, int j, int& X, int& O, int& T, bool& END) {
 	      Board[i][j] = 'x';
 	      XTurn = false;
 	      printBoard(Board, i, j);
-	      checkWin(Board, i, j, X, O, T, END);
+	      checkWin(Board, i, j, X, O, T, END, TieCheck);
 	      Printed = true;
 	      ValidTurn = true;
 	    }
@@ -383,7 +380,7 @@ int main() {
   ReDo(X, O, T);
 }
 
-void ReDo(int& X, int& O, int& T) {
+void ReDo(int& X, int& O, int& T, int& TieCheck) {
   int i = 0;
   int j = 0;
   bool EndGame = false;
@@ -395,5 +392,5 @@ void ReDo(int& X, int& O, int& T) {
     { 'c', ' ', ' ', ' ' }
      } ;
   printBoard(Board, i, j);
-  Turn(Board, i, j, X, O, T, END);
+  Turn(Board, i, j, X, O, T, END, TieCheck);
 }
